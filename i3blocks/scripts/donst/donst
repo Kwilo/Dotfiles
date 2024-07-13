@@ -1,0 +1,12 @@
+#!/bin/bash
+# Written by The Man That is I
+# REQ: Nerd Font for icon
+
+set -e
+
+if [[ $(dunstctl is-paused) == "false" ]]; then
+	printf "\n"
+else
+	printf "\n"
+fi
+exit

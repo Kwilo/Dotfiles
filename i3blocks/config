@@ -1,0 +1,61 @@
+# i3blocks config
+# ----- Global -----
+markup=pango
+color=#282828
+
+# ----- MPRIS -----
+[mediaplayer]
+command=$HOME/.config/i3blocks/scripts/mediaplayer/mediaplayer
+instance=cmus
+color=#f2f4f8
+interval=5
+signal=10
+
+# ----- Dunst -----
+[dunst-status]
+command=$HOME/.config/i3blocks/scripts/donst/donst
+color=#f2f4f8
+interval=once
+signal=11
+
+# ----- Volume -----
+[volume]
+full_text=volume
+command=echo "<span>$(amixer -M get Master | awk -F"[][]" '/%/ { print $2 }' | awk -F"%" 'BEGIN{tot=0; i=0} {i++; tot+=$1} END{printf("%s\n", tot/i) }')%</span>"
+label=<span font_desc="13">󱄠 </span>
+color=#f2f4f8
+#background=#282828
+interval=1
+
+# ----- Weekday -----
+# [weekday-icon]
+# full_text=<span>  </span>
+# #background=#282828
+# separator=false
+# separator_block_width=0
+# color=#ebdbb2
+
+# [weekday]
+# full_text=weekday
+# command=echo "<span> $(date +"%A") </span>"
+# #background=#ebdbb2
+# interval=once
+# color=#ebdbb2
+
+# ----- Date/Time -----
+# [date-icon]
+# full_text=<span>  </span>
+# color=#ebdbb2
+# #background=#282828
+# separator=false
+# separator_block_width=0
+
+[time]
+full_text=time
+command=echo "<span>$(date +"%A %d/%H:%M") </span>"
+#background=#ebdbb2
+color=#f2f4f8
+interval=1
+
+# vim:ft=cfg
+# END
