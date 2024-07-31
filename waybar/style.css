@@ -1,94 +1,87 @@
+/**
+# COLOR LEGEND:
+
+bg;         Bar Background
+bg-alt;     Module Highlight
+bg-module;  Module Background
+bg-unox;    Unoccupied Tag Background
+fg;         Bar Text
+fg-alt;     Tag Text
+urgent;     Urgent Tag
+**/
+
+@define-color bg #16181a;
+@define-color bg-alt #2e3236;
+@define-color bg-module #222428;
+@define-color bg-unoc #202226;
+@define-color fg #ffffff;
+@define-color fg-alt #a3a3a3;
+@define-color urgent #bf616a;
+
+/* Global */
 * {
-  /* `otf-font-awesome` is required to be installed for icons */
-  font-family: Cinzel;
+  font-family: RobotoMono Nerd Fonts;
   font-size: 13px;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 0px;
 }
 
+/* Waybar */
 window#waybar {
-  background-color: rgba(17, 17, 17, 0.93);
-  border-bottom: 3px solid rgba(0, 0, 0, 0);
-  color: #ffffff;
+  background-color: @bg;
+  color: red;
   transition-property: background-color;
   transition-duration: .5s;
 }
 
-window#waybar.hidden {
-  opacity: 0.2;
-}
-
-
-button {
-  /* Use box-shadow instead of border so the text isn't offset */
-  /* Avoid rounded borders under each button name */
-  border: none;
-  border-radius: 0;
-  padding: 5px;
-}
-
-button.icon {
-  color: red;
-}
-
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-button:hover {
-  background: inherit;
-  padding: 5px;
-}
-
-/* you can set a style on hover for any module like this */
-/* #pulseaudio:hover {
-  background-color: #a37800;
-} */
-
-#tags button {
-  padding: 0 5px;
-  background-color: transparent;
-  color: #ffffff;
-}
-
-#tags button:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-#tags button.focused {
-  background-color: #64727D;
-}
-
-#tags button.urgent {
-  background-color: #c00300;
-}
-
-#tags button.active {
-  background-color: #eb4d4b;
-}
-
-#mode {
-  background-color: #64727D;
-}
-
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#wireplumber,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#scratchpad,
-#power-profiles-daemon,
-#mpd {
-  padding: 0 10px;
-  color: #ffffff;
-  background-color: transparent;
-}
-
-#window,
+/* River/tags */
 #tags {
-  margin: 0;
+  background-color: @bg;
+  margin-right: 4px;
+}
+#tags button {
+  color: @bg-unoc;
+}
+#tags button.occupied {
+  color: @bg-alt;
+}
+#tags button.focused {
+  color: @fg-alt;
+}
+#tags button.urgent {
+  color: @urgent;
+}
+
+/* Global Module Styles */
+#clock,
+#network,
+#battery,
+#wireplumber {
+  background-color: @bg-module;
+  color: @fg;
+  padding-right: 6px;
+}
+
+/* Group 1 */
+/* G1: Bot */
+#clock {
+  padding-right: 2px;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  border-bottom: 2px solid @bg-alt;
+}
+
+/* Group 2 */
+#battery,
+#network,
+#wireplumber {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+/* G2: Bot */
+#wireplumber {
+  padding-right: 4px;
+  border-bottom: 2px solid @bg-alt;
 }

@@ -21,6 +21,8 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
+# Shut the fetch up
+# source $HOME/bin/stfu.sh
 ## ALIAS
 alias cl="clear"
 alias ff="fastfetch"
@@ -29,5 +31,6 @@ alias lsda="lsd -la"
 alias protontricks='flatpak run com.github.Matoking.protontricks'
 # PROMPT
 ## wrapper: "\[\e[91m\]  [  \[\e[0m\]  --%--  \[\e[91m\]  ]  \[\e[0m\]"
-export PS1="\[\e[91m\][\[\e[0m\]\A\[\e[91m\]][\[\e[0m\]\w\[\e[91m\]]\[\e[0m\]\$ "
-. "$HOME/.cargo/env"
+# export PS1="\[\e[91m\][\[\e[0m\]\A\[\e[91m\]][\[\e[0m\]\w\[\e[91m\]]\[\e[0m\]\$ "
+## Starship.rs
+eval "$(starship init bash)"

@@ -6,16 +6,12 @@
 # Autostart
 
 wlr-randr --output eDP-1 --off
+pipewire &
 swww-daemon &
 swww restore
-pipewire &
 waybar &
-
-
-
 # Fuzzel
-riverctl map normal Super D spawn "wofi --show drun"
-
+riverctl map normal Super D spawn "rofi -show drun -theme ice.rasi"
 # Super+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
 riverctl map normal Super+Shift Return spawn kitty
 
