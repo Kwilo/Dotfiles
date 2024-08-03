@@ -4,8 +4,9 @@
 # 
 # 
 # 
-
+# ╭╴ ╰─
 format = """
+[╭╴](fg:bg2)\
 [](fg:fg)\
 $username\
 [](fg:fg bg:bg4)\
@@ -18,6 +19,9 @@ $git_status\
 [](fg:bg2 bg:bg1)\
 $cmd_duration\
 [](fg:bg1)\
+$fill\
+\n\
+[╰⎯](fg:bg2)\
 $character"""
 
 palette = 'cyberdream'
@@ -29,6 +33,10 @@ bg1 = "#2e3440"
 bg2 = "#3b4252"
 bg3 = "#434c5e"
 bg4 = "#4c566a"
+
+[fill]
+symbol = ''
+style = 'fg:bg1'
 
 [username]
 show_always = true
@@ -65,12 +73,12 @@ disabled = false
 
 [character]
 disabled = false
-success_symbol = ''
-error_symbol = ''
-vimcmd_symbol = ''
-vimcmd_replace_one_symbol = '[](bold fg:fg)'
-vimcmd_replace_symbol = '[](bold fg:fg)'
-vimcmd_visual_symbol = '[](bold fg:fg)'
+success_symbol = '[](bold fg:bg2)'
+error_symbol = '[ ](bold fg:red)'
+vimcmd_symbol = ''
+vimcmd_replace_one_symbol = '[](bold fg:bg2)'
+vimcmd_replace_symbol = '[](bold fg:bg3)'
+vimcmd_visual_symbol = '[](bold fg:bg4)'
 
 # success_symbol = '[](bold fg:color_green)'
 # error_symbol = '[](bold fg:color_red)'

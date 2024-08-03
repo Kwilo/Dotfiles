@@ -23,7 +23,7 @@ unset rc
 
 # Shut the fetch up
 # source $HOME/bin/stfu.sh
-fastfetch -l none &
+# fastfetch -l none &
 ## ALIAS
 alias cl="clear"
 alias ff="fastfetch"
