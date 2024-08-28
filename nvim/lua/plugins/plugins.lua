@@ -37,7 +37,6 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 	},
-	-- Lualine
 	{
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' }
