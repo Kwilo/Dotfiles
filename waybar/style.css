@@ -1,87 +1,137 @@
-/**
-# COLOR LEGEND:
+@define-color foreground #eee3d0;
+@define-color background #111111;
+@define-color border #333637;
+@define-color ws-highlight #33ff33;
+@define-color ws-urgent #ea6962;
 
-bg;         Bar Background
-bg-alt;     Module Highlight
-bg-module;  Module Background
-bg-unox;    Unoccupied Tag Background
-fg;         Bar Text
-fg-alt;     Tag Text
-urgent;     Urgent Tag
+@define-color red #ea6962;
+@define-color orange #e78a4e;
+@define-color yellow #d8a657;
+@define-color blue #7daea3;
+@define-color purple #d3869b;
+@define-color green #00ff00;
+
+/**
+ * ______  ___  ______ 
+ * | ___ \/ _ \ | ___ \
+ * | |_/ / /_\ \| |_/ /
+ * | ___ \  _  ||    / 
+ * | |_/ / | | || |\ \ 
+ * \____/\_| |_/\_| \_|
 **/
 
-@define-color bg #16181a;
-@define-color bg-alt #2e3236;
-@define-color bg-module #222428;
-@define-color bg-unoc #202226;
-@define-color fg #ffffff;
-@define-color fg-alt #a3a3a3;
-@define-color urgent #bf616a;
-
-/* Global */
 * {
-  font-family: RobotoMono Nerd Fonts;
-  font-size: 13px;
-  padding: 0px;
-  margin: 0px;
-  border-radius: 0px;
+    font-family: Iosevka Nerd Font;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
 }
 
-/* Waybar */
-window#waybar {
-  background-color: @bg;
-  color: red;
-  transition-property: background-color;
-  transition-duration: .5s;
+#waybar {
+    color: @foreground;
+    background-color: @background;
+	border-color: @border;
+	border-width: 2px;
 }
 
-/* River/tags */
-#tags {
-  background-color: @bg;
-  margin-right: 4px;
-}
-#tags button {
-  color: @bg-unoc;
-}
-#tags button.occupied {
-  color: @bg-alt;
-}
-#tags button.focused {
-  color: @fg-alt;
-}
-#tags button.urgent {
-  color: @urgent;
+#waybar.topbar {
+	border-style: none none solid none;
 }
 
-/* Global Module Styles */
-#clock,
-#network,
-#battery,
-#wireplumber {
-  background-color: @bg-module;
-  color: @fg;
-  padding-right: 6px;
+#waybar.bottombar {
+	border-style: solid none none none;
 }
 
-/* Group 1 */
-/* G1: Bot */
-#clock {
-  padding-right: 2px;
-  padding-bottom: 4px;
-  margin-bottom: 6px;
-  border-bottom: 2px solid @bg-alt;
+/**
+ *  _    _  ___________ _   __ ___________  ___  _____  _____ _____ 
+ * | |  | ||  _  | ___ \ | / //  ___| ___ \/ _ \/  __ \|  ___/  ___|
+ * | |  | || | | | |_/ / |/ / \ `--.| |_/ / /_\ \ /  \/| |__ \ `--. 
+ * | |/\| || | | |    /|    \  `--. \  __/|  _  | |    |  __| `--. \
+ * \  /\  /\ \_/ / |\ \| |\  \/\__/ / |   | | | | \__/\| |___/\__/ /
+ *  \/  \/  \___/\_| \_\_| \_/\____/\_|   \_| |_/\____/\____/\____/ 
+**/
+
+#workspaces button {
+	color: @foreground;
+	margin-right: 2px;
 }
 
-/* Group 2 */
-#battery,
-#network,
-#wireplumber {
-  padding-top: 2px;
-  padding-bottom: 2px;
+#workspaces button.empty {
+	color: @border;
 }
 
-/* G2: Bot */
-#wireplumber {
-  padding-right: 4px;
-  border-bottom: 2px solid @bg-alt;
+#workspaces button.visible {
+	border-style: solid none none none;
+	border-width: 2px;
+}
+
+#workspaces button.active {
+	border-style: none none solid none;
+	border-color: #33ff33;
+	border-width: 1px;
+	border-radius: 0;
+}
+
+#workspaces button.urgent {
+	border-style: none none solid none;
+	border-color: @ws-urgent;
+	border-radius: 0;
+}
+
+/**
+ * ___  ______________ _   _ _      _____ _____ 
+ * |  \/  |  _  |  _  \ | | | |    |  ___/  ___|
+ * | .  . | | | | | | | | | | |    | |__ \ `--. 
+ * | |\/| | | | | | | | | | | |    |  __| `--. \
+ * | |  | \ \_/ / |/ /| |_| | |____| |___/\__/ /
+ * \_|  |_/\___/|___/  \___/\_____/\____/\____/ 
+**/
+
+#backlight:hover,
+#pulseaudio:hover,
+#disk:hover,
+#temperature:hover,
+#mpris:hover,
+#user:hover,
+#custom-hiscore:hover,
+#custom-reboot:hover,
+#custom-lock:hover,
+#custom-quit:hover,
+#custom-power:hover,
+#network:hover,
+#battery:hover,
+#privacy:hover,
+#tray:hover,
+#clock:hover{
+	border-style: none none solid none;
+	border-width: 1px;
+	border-radius: 0px;
+	border-color: @ws-highlight;
+}
+
+#backlight-slider slider,
+#pulseaudio-slider slider {
+    min-height: 0px;
+    min-width: 0px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+#backlight-slider trough,
+#pulseaudio-slider trough {
+    min-height: 10px;
+    min-width: 80px;
+    border-radius: 0px;
+    background-color: black;
+}
+#backlight-slider highlight,
+#pulseaudio-slider highlight {
+    min-width: 10px;
+    border-radius: 0px;
+    background-color: @green;
+}
+
+#custom-sep {
+	color: @border;
 }

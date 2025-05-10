@@ -1,94 +1,49 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-
-# 
-# 
-# 
-# ╭╴ ╰─
 format = """
-[╭╴](fg:fg1)\
-[](fg:fg)\
-$username\
-[](fg:fg bg:bg4)\
-$localip\
-[](fg:bg4 bg:bg3)\
-$directory\
-[](fg:bg3 bg:bg2)\
-$git_branch\
-$git_status\
-[](fg:bg2 bg:bg1)\
-$cmd_duration\
-[](fg:bg1)\
-$fill\
-\n\
-[╰ ](fg:fg1)\
-$character"""
-
-palette = 'custom'
-
-[palettes.custom]
-fg = "#d0d0d1"
-fg1 = "#737475"
-bg = "#16181a"
-bg1 = "#2d3236"
-bg2 = "#222528"
-bg3 = "#2d3236"
-bg4 = "#222528"
-yellow = "#ebcb8b"
-red = "#bf616a"
-orange = "#d08770"
-green = "#a3be8c"
-purple = "#b48ead"
-
-[fill]
-symbol = ''
-style = 'fg:fg1'
+┌─\\($username\\)─\\[$localip\\]─\\[$directory\\]─\\[$git_branch$git_status\\]\\($cmd_duration\\)$fill
+└$character
+"""
 
 [username]
 show_always = true
-style_user = "bg:fg fg:bg"
-style_root = "bg:bg  fg:fg"
+style_user = "fg:red"
+style_root = "fg:red"
 format = '[$user]($style)'
-
-[directory]
-style = "bg:bg3 fg:fg"
-format = "[ $path ]($style)"
-truncation_length = 0
-truncation_symbol = "…/"
-
-[git_branch]
-symbol = ""
-style = "bg:bg2"
-format = '[[ $symbol $branch ](fg:fg bg:bg2)]($style)'
-
-[git_status]
-style = "bg:bg2"
-format = '[[($all_status$ahead_behind )](fg:fg bg:bg2)]($style)'
-
-[cmd_duration]
-min_time = 500
-# format = 'underwent [$duration](bold yellow)'
-style = "bg:bg1"
-format = '[[ $duration ](fg:fg bg:bg1)]($style)'
 
 [localip]
 ssh_only = false
-style = "bg:bg4"
-format = '[ $localipv4 ]($style)'
+style = "fg:green"
+format = '[$localipv4]($style)'
 disabled = false
+
+[directory]
+style = "fg:yellow"
+format = "[$path]($style)"
+fish_style_pwd_dir_length = 1 
+
+[git_branch]
+symbol = " "
+style = "fg:blue"
+format = '[$symbol $branch ]($style)'
+
+[git_status]
+style = "fg:blue"
+format = '[($all_status$ahead_behind) ]($style)'
+
+[cmd_duration]
+min_time = 500
+style = "fg:purple"
+format = '[$duration]($style)'
+
+[fill]
+symbol = '─'
 
 [character]
 disabled = false
 success_symbol = '[](bold fg:yellow)'
 error_symbol = '[ ](bold fg:red)'
 vimcmd_symbol = ''
-vimcmd_replace_one_symbol = '[](bold fg:bg2)'
-vimcmd_replace_symbol = '[](bold fg:bg3)'
-vimcmd_visual_symbol = '[](bold fg:bg4)'
-
-# success_symbol = '[](bold fg:color_green)'
-# error_symbol = '[](bold fg:color_red)'
-# vimcmd_symbol = '[](bold fg:color_green)'
-# vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
-# vimcmd_replace_symbol = '[](bold fg:color_purple)'
-# vimcmd_visual_symbol = '[](bold fg:color_yellow)'
+vimcmd_replace_one_symbol = '[](bold green)'
+vimcmd_replace_symbol = '[](bold green)'
+vimcmd_visual_symbol = '[](bold green)'

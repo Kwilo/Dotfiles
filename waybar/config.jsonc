@@ -1,78 +1,209 @@
-// -*- mode: jsonc -*-
-{
-    // BAR
-    "layer": "top",
-    "output": "HDMI-A-1",
-    "position": "left",
-    "reload_on_style_change": true,
-    "width": 28,
-    "modules-left": ["clock", "network", "battery", "wireplumber", "river/tags"],
-    "modules-center": [],
-    "modules-right": ["tray"],
-    // RIVER
-    "river/tags": {
-        "num-tags": 5,
-        "tag-labels": ["","","","",""]
-    },
-    // MODULES
-    "clock": {
-        "format": "{:%H\n%M}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "calendar": {
-                    "mode"          : "month",
-                    "weeks-pos"     : "right",
-                    "on-scroll"     : 1,
-                    "format": {
-                              "months":     "<span color='#ffead3'><b>{}</b></span>",
-                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-                              }
-                    },
-        "actions":  {
-                    "on-click-right": "mode",
-                    "on-click-forward": "tz_up",
-                    "on-click-backward": "tz_down",
-                    "on-scroll-up": "shift_up",
-                    "on-scroll-down": "shift_down"
-                    }
-    },
-    "battery": {
-        "bat": "BAT0",
-        "interval": 60,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-	"format": "{icon}",
-	"format-charging": "{icon}", 
-	// you can add additional format-{power-status}, just check /sys/class/power_supply/<bat>/status and replace {power-status} with given output
-	"format-full": "{icon}",
-	"format-icons": ["", "", "", "", ""],
-	"tooltip": true,
-	"tooltip-format": "{capacity}%: {timeTo}",
-    },
-    "network": {
-        "interface": "wlp2s0",
-        "format": "",
-        "format-disconnected": "", //An empty format will hide the module.
-        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-        "tooltip-format-ethernet": "{ifname} ",
-        "tooltip-format-disconnected": "Disconnected",
-        "max-length": 50
-    },
-    "tray": {
-        "icon-size": 16,
-        "spacing": 10
-    },
-    "wireplumber": {
-        "format": "{icon}",
-        "format-muted": "󱗿",
-        "tooltip": true,
-        "tooltip-format":"{volume}%",
-        "on-click": "pavucontrol",
-        "format-icons": ["󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈"]
-    },
-}
+[
+	{
+		// TOP BAR
+		"name": "topbar",
+		"layer": "top",
+		"position": "top",
+		"height": 25,
+		"spacing": 8,
+		"reload_on_style_change": true,
+		// MODULES
+		"modules-left": [ "hyprland/workspaces","custom/sep", "hyprland/window", "custom/sep"],
+		"modules-center": ["custom/sep", "clock", "custom/sep"],
+		"modules-right": ["tray", "privacy", "custom/sep", "battery", "network", "custom/sep", "group/group-power"],
+		// --------
+		"hyprland/workspaces": {
+			"format": "{icon}",
+			"format-icons": {
+				"1": "I",
+				"2": "II",
+				"3": "III",
+				"4": "IV",
+				"5": "V",
+				"6": "I",
+				"7": "II",
+				"8": "III",
+				"9": "IV",
+				"10": "V",
+			},
+			"all-outputs": false,
+		},
+		"hyprland/window": {
+			"format": "{title}",
+		},
+		// --------
+		"group/group-power": {
+			"orientation": "inherit",
+			"drawer": {
+				"transition-duration": 500,
+				"children-class": "not-power",
+				"transition-left-to-right": false,
+			},
+			"modules": [
+				"custom/power", 
+				"custom/quit",
+				"custom/lock",
+				"custom/reboot",
+			]
+		},
+		"custom/quit": {
+			"format": "  󰗼  ",
+			"tooltip": true,
+			"tooltip-format": "logout",
+			"on-click": "hyprctl dispatch exit"
+		},
+		"custom/lock": {
+			"format": "  󰍁  ",
+			"tooltip": true,
+			"tooltip-format": "lock",
+			"on-click": ""
+		},
+		"custom/reboot": {
+			"format": "  󰜉  ",
+			"tooltip": true,
+			"tooltip-format": "reboot",
+			"on-click": "reboot"
+		},
+		"custom/power": {
+			"format": "  ",
+			"tooltip": true,
+			"tooltip-format": "shutdown",
+			"on-click": "shutdown now"
+		},
+		"battery": {
+			"bat": "BAT0",
+			"interval": 60,
+			"states": {
+				"warning": 30,
+				"critical": 15
+			},
+			"format": "{icon}  {capacity}%",
+			"format-icons": ["", "", "", "", ""],
+			"max-length": 25
+		},
+		"privacy": {
+			"icon-spacing": 4,
+			"icon-size": 18,
+			"transition-duration": 250,
+			"modules": [
+				{
+					"type": "screenshare",
+					"tooltip": true,
+					"tooltip-icon-size": 24
+				},
+				{
+					"type": "audio-out",
+					"tooltip": true,
+					"tooltip-icon-size": 24
+				},
+				{
+					"type": "audio-in",
+					"tooltip": true,
+					"tooltip-icon-size": 24
+				}
+			]
+		},
+		"network": {
+			"interface": "wlan0",
+			"format": "  {ifname}",
+			"format-disconnect": "󰣼 ",
+			"format-ethernet": "󰈀 {ipaddr}",
+			"format-wifi": "  {essid}",
+		},
+		"tray": {
+			"icon-size": 14,
+			"spacing": 10,
+			"show-passive-items": true,
+		},
+		"clock": {
+		     "format-alt": "{:%a, %d. %b  %H:%M}"
+		},
+		"custom/sep": {
+			"format": " "
+		}
+	},
+	{
+		// BOTTOM BAR
+		"name": "bottombar",
+		"layer": "top",
+		"position": "bottom",
+		"height": 25,
+		"spacing": 8,
+		"reload_on_style_change": true,
+		// MODULES
+		"modules-left": ["custom/hiscore", "user", "custom/sep", "mpris"],
+		"modules-center": ["custom/sep", "temperature", "disk", "custom/sep"],
+		"modules-right": ["custom/sep", "backlight", "backlight/slider", "pulseaudio", "pulseaudio/slider"],
+		// --------
+		"custom/hiscore": {
+			"format": "HISCORE: {}",
+			"exec": "$HOME/.config/waybar/scripts/hiscore.sh",
+			"exec-if": "exit 0",
+			"interval": "once", 
+			"tooltip": true,
+			"tooltip-format": "Days since OS install."
+		},
+		"temperature": {
+			"thermal-zone": 7,
+			"interval": 10,
+			"format": "  {temperatureC}°C",
+		},
+		"disk": {
+			"interval": 120,
+			"format": "󰉉 {free}",
+			"tooltip": true,
+			"tooltip-format": "{percentage_free}% free: {used} / {total}",
+			"path": "/",
+			"unit": "GB"
+		},
+		"backlight": {
+			"device": "intel_backlight",
+			"format": "{icon} {percent}%",
+			"format-icons": ["  ", "  "]
+		},
+		"backlight/slider": {
+			"min": 0,
+			"max": 100,
+			"orientation": "horizontal",
+		},
+		"pulseaudio": {
+			"format": "{icon}{volume}%",
+			"format-bluetooth": "{icon} {volume}% ",
+			"format-muted": "  ",
+			"format-icons": {
+				"alsa_output.pci-0000_00_1f.3.analog-stereo": "   ",
+				"alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "   󱡬 ",
+				"headphone": "  ",
+				"hands-free": "  ",
+				"headset": " 󰋎 ",
+				"phone": "  ",
+				"phone-muted": "  ",
+				"portable": "  ",
+				"car": "  ",
+				"default": ["  ", "  "]
+			},
+			"scroll-step": 1,
+			"on-click": "easyeffects",
+			"ignored-sinks": ["Easy Effects Sink"]
+		},
+		"pulseaudio/slider": {
+			"min": 0,
+			"max":100,
+			"orientation": "horizental"
+		},
+		"user": {
+			"format": "  {work_H}:{work_M}",
+			"interval": 60,
+		},
+		"mpris": {
+			"format": "{dynamic}",
+			"dynamic-order": ["artist", "title", "position", "length"],
+			"dynamic-importance-order": ["artist", "title", "position", "length"],
+			"dynamic-len": 50,
+			"interval": 1,
+		},
+		"custom/sep": {
+			"format": " "
+		}
+	}
+]

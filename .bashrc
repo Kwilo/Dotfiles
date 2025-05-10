@@ -26,6 +26,14 @@ unset rc
 ## ALIAS
 alias cl="clear"
 alias lsda="lsd -la"
-alias protontricks='flatpak run com.github.Matoking.protontricks'
+alias lsdl="lsd -l"
+alias lsdt="lsd --tree"
+alias lsdtl="lsd --tree -l"
+
 # Starship.rs
 eval "$(starship init bash)"
+
+# SOURCE
+. "$HOME/.cargo/env"
+
+export PATH=$PATH:~/.spicetify
